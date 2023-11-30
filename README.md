@@ -2,6 +2,8 @@
 
 It's a simple logger made in C.
 
+NOTE: Still in development.
+
 # Usage
 
 - Log to the console and outputs the log into a text file that you can set to.
