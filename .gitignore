@@ -1,0 +1,10 @@
+.vs
+*.vcxproj
+*.vcxproj.filter
+*.vcxproj.user
+*.sln
+
+bin
+
+log.txt
+
