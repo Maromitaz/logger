@@ -26,9 +26,9 @@ struct log_data_type {
 struct log_data_type log_level[] = {
 	{.terminal_font = "\033[37;1m", .log_level = "[INFO] ", .terminal_reset = "\033[0m"},
 	{.terminal_font = "\033[33;1m", .log_level = "[WARNING] ", .terminal_reset = "\033[0m"},
-  {.terminal_font = "\033[31;1m", .log_level = "[ERROR] ", .terminal_reset = "\033[0m"},
-  {.terminal_font = "\033[31;1m", .log_level = "[PANIC] ", .terminal_reset = "\033[0m"}
-;
+	{.terminal_font = "\033[31;1m", .log_level = "[ERROR] ", .terminal_reset = "\033[0m"},
+	{.terminal_font = "\033[31;1m", .log_level = "[PANIC] ", .terminal_reset = "\033[0m"}
+};
 
 enum {
 	LOG_INFO = 0,
@@ -38,7 +38,7 @@ enum {
 };
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 void save_log_to_file(char* log_message) {
 	FILE* file = fopen(file_name, "a");
@@ -53,7 +53,7 @@ void save_log_to_file(char* log_message) {
 #define log(level, args, ...) _log(level, args, __VA_ARGS__, (void *)0)
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 void _log(short level, char* args, ...) {
 	if (level < LOG_INFO || level > LOG_PANIC) {
@@ -128,7 +128,7 @@ char colors_array[][3] = {
 #define custom_log(log_level, begin, ...) _custom_log(log_level, begin, __VA_ARGS__, (void *)0)
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 void _custom_log(struct custom_log_level log_level, char* begin, ...) {
 	size_t alloc = 0;
