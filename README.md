@@ -13,6 +13,14 @@ NOTE: Still in development.
 
 To use this header file, you must acknowledge that there are two different functions to log: the already defined ones and the custom one.
 
+### Initialization of the lib
+
+To initialize this lib you must use the "file_init" function.
+
+```c
+file_init();
+```
+
 ### The standard one (non-customizable)
 
 It works with a function and a set of enums that are used in an array of structures called "log\_data\_type" and the name of the array is "log\_level".
@@ -33,7 +41,25 @@ And to finally tell you the enums and their use:
 
 - LOG\_PANIC - Will print "[PANIC] ..." with a red label but will also exit the program.
 
-NOTE: This will also be written (without colors) into a file "log.txt" where the executable/binary is located. This will change in the future with: custom file name, custom path to log, every log will have a time stamp at the beggining of the log-line (when the *log* function is called).
+The function looks like this:
+
+```c
+void log(bool log_to_file, short level, char* args, ...);
+```
+The explanation of the function:
+
+- log\_to\_file -> a boolean (1 or 0) that tells if the log should be saved to a function;
+
+- level -> makes use of the enums that were explained before;
+
+- args -> the arguments given to the function to log to a file.
+
+EXAMPLES (from the main.c file):
+```c
+log(false, LOG_INFO, "Informations....");
+log(false, LOG_WARNING, "This is soooo coooooooool!!!!");
+log(false, LOG_ERROR, "Uh oh... ", "This is big stuff now...");
+```
 
 ### The custom logging
 
@@ -42,7 +68,7 @@ To log with a custom logging symbol (or simply said another text inside the brac
 It's a lot easier because it's just words that represent colors:
 
 - RED -> red color;
-- YELLOW -> yellow colors;
+- YELLOW -> yellow color;
 - and so on.
 
 And the symbol you want to use (or text inside the brackets).
@@ -61,7 +87,8 @@ struct custom_log_level test_custom_log = {
 And to actually use the log:
 
 ```c
-custom_log(test_custom_log, "Parry ", "this ", "you ", "filthy ", "casual.");
+// It starts the same way as the log function
+custom_log(false, test_custom_log, "Parry ", "this ", "you ", "filthy ", "casual.");
 ```
 
 # Compiling

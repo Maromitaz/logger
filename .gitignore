@@ -8,3 +8,5 @@ bin
 
 log.txt
 
+*.make
+Makefile

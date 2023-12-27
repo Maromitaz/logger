@@ -1,11 +1,10 @@
 workspace "Logger"
   configurations {"Debug", "Release", "Dist"}
 
-
 project "log"
   kind "ConsoleApp"
   language "C"
-  cdialect "C89"
+  cdialect "C17"
 
   targetdir "%{wks.location}/bin/"
   objdir "%{wks.location}/bin/int/"
