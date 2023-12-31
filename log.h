@@ -1,6 +1,9 @@
 #ifndef maromitaz_cli_log
 #define maromitaz_cli_log
 
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -25,10 +28,6 @@ typedef signed char bool;
 
 char file_path[MAX_PATH] = { 0 };
 char save_to[MAX_FILE_NAME] = "log.txt";
-
-#ifdef __cplusplus
-extern "C"{
-#endif // __cplusplus
 
 void file_init() {
 	if (!GetModuleFileNameA(NULL, file_path, MAX_PATH)) {
@@ -57,9 +56,6 @@ void set_file_name(char* c_name) {
 	strcpy(save_to, c_name);
 }
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
 
 #else
 #include <unistd.h>
@@ -69,11 +65,6 @@ void set_file_name(char* c_name) {
 
 char file_path[MAX_PATH] = { 0 };
 char save_to[MAX_FILE_NAME] = "log.txt";
-
-
-#ifdef __cplusplus
-extern "C"{
-#endif // __cplusplus
 
 // Defining the 
 #ifdef __linux__
@@ -107,11 +98,6 @@ void set_file_name(char* c_name) {
 	strcpy(save_to, c_name);
 }
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
-
-
 #endif // _WIN32
 
 
@@ -136,10 +122,6 @@ enum {
 	LOG_PANIC = 3
 };
 
-#ifdef __cplusplus
-extern "C"{
-#endif // __cplusplus
-
 void save_log_to_file(char* log_message) {
 	char* save_path = (char*)malloc(strlen(file_path) + strlen(save_to) + 1);
 	memset(save_path, 0, sizeof(save_path));
@@ -162,15 +144,9 @@ void save_log_to_file(char* log_message) {
 	fclose(file);
 	free(save_path);
 }
-#ifdef __cplusplus
-}
-#endif // __cplusplus
 
 #define log(level, args, ...) _log(level, args, __VA_ARGS__, (void *)0)
 
-#ifdef __cplusplus
-extern "C"{
-#endif // __cplusplus
 void _log(bool log_to_file, short level, char* args, ...) {
 	if (level < LOG_INFO || level > LOG_PANIC) {
 		fprintf(stderr, "%s Logging level unknown", log_level[3]);
@@ -211,9 +187,6 @@ void _log(bool log_to_file, short level, char* args, ...) {
 	free(log_message);
 	if (level == LOG_PANIC) exit(1);
 }
-#ifdef __cplusplus
-}
-#endif // __cplusplus
 
 struct custom_log_level
 {
@@ -246,9 +219,6 @@ char colors_array[][3] = {
 
 #define custom_log(log_to_file, log_level, ...) _custom_log(log_to_file, log_level, __VA_ARGS__, (void *)0)
 
-#ifdef __cplusplus
-extern "C"{
-#endif // __cplusplus
 void _custom_log(bool log_to_file, struct custom_log_level log_level, char* begin, ...) {
 	size_t alloc = 0;
 
