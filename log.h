@@ -111,9 +111,12 @@ struct {
 	{.terminal_font = "\033[31;1m", .log_level = "[ERROR] ", .terminal_reset = "\033[0m"},
 	{.terminal_font = "\033[31;1m", .log_level = "[PANIC] ", .terminal_reset = "\033[0m"}
 };
+<<<<<<< HEAD
 
 // https://en.wikipedia.org/wiki/ANSI_escape_code
 
+=======
+>>>>>>> 7e0d0d18efce9bf133d5169ed9440e674723f669
 
 enum {
 	LOG_INFO = 0,
@@ -122,6 +125,12 @@ enum {
 	LOG_PANIC = 3
 };
 
+<<<<<<< HEAD
+=======
+#ifdef __cplusplus
+extern "C" {
+#endif
+>>>>>>> 7e0d0d18efce9bf133d5169ed9440e674723f669
 void save_log_to_file(char* log_message) {
 	char* save_path = (char*)malloc(strlen(file_path) + strlen(save_to) + 1);
 	memset(save_path, 0, sizeof(save_path));
@@ -147,7 +156,14 @@ void save_log_to_file(char* log_message) {
 
 #define log(level, args, ...) _log(level, args, __VA_ARGS__, (void *)0)
 
+<<<<<<< HEAD
 void _log(bool log_to_file, short level, char* args, ...) {
+=======
+#ifdef __cplusplus
+extern "C" {
+#endif
+void _log(short level, char* args, ...) {
+>>>>>>> 7e0d0d18efce9bf133d5169ed9440e674723f669
 	if (level < LOG_INFO || level > LOG_PANIC) {
 		fprintf(stderr, "%s Logging level unknown", log_level[3]);
 		exit(1);
@@ -219,7 +235,14 @@ char colors_array[][3] = {
 
 #define custom_log(log_to_file, log_level, ...) _custom_log(log_to_file, log_level, __VA_ARGS__, (void *)0)
 
+<<<<<<< HEAD
 void _custom_log(bool log_to_file, struct custom_log_level log_level, char* begin, ...) {
+=======
+#ifdef __cplusplus
+extern "C" {
+#endif
+void _custom_log(struct custom_log_level log_level, char* begin, ...) {
+>>>>>>> 7e0d0d18efce9bf133d5169ed9440e674723f669
 	size_t alloc = 0;
 
 	printf("\033[%s", colors_array[log_level.color]);
